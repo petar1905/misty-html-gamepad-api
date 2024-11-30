@@ -26,7 +26,7 @@ function gameLoop() {
         leftStickInfo.innerText = `Left Stick: X=${stickValues[0]}, Y=${stickValues[1]}`;
         rightStickInfo.innerText = `Right Stick: X=${stickValues[2]}, Y=${stickValues[3]}`;
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
     requestAnimationFrame(gameLoop);
 }
