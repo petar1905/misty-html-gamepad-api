@@ -8,14 +8,10 @@ function getGamepad() {
             return gamepads[i];
         }
     }
-    return null;
+    throw Error("Gamepad not found.");
 }
 
 function readAnalogSticks(gamepad) {
-    if (!gamepad) {
-        console.log("No gamepad connected.");
-        return;
-    }
     const leftStickX = gamepad.axes[0];
     const leftStickY = gamepad.axes[1];
     const rightStickX = gamepad.axes[2];
