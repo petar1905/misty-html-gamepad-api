@@ -1,5 +1,5 @@
-var leftStickInfo = document.getElementById("leftStickInfo");
-var rightStickInfo = document.getElementById("rightStickInfo");
+let leftStickInfo = document.getElementById("leftStickInfo");
+let rightStickInfo = document.getElementById("rightStickInfo");
 
 function getGamepad() {
     const gamepads = navigator.getGamepads();
