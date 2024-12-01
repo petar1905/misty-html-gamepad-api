@@ -17,13 +17,13 @@ function getGamepad() {
 
 function readAnalogSticks(gamepad, deadzone) {
     let leftStickX = gamepad.axes[0];
-    if (leftStickX < deadzone && leftStickX > 0) leftStickX = 0;
+    if (leftStickX < deadzone && leftStickX > -deadzone) leftStickX = 0;
     let leftStickY = gamepad.axes[1];
-    if (leftStickY < deadzone  && leftStickY > 0) leftStickY = 0;
+    if (leftStickY < deadzone  && leftStickY > -deadzone) leftStickY = 0;
     let rightStickX = gamepad.axes[2];
-    if (rightStickX < deadzone  && rightStickX > 0) rightStickX = 0;
+    if (rightStickX < deadzone  && rightStickX > -deadzone) rightStickX = 0;
     let rightStickY = gamepad.axes[3];
-    if (rightStickY < deadzone  && rightStickY > 0) rightStickY = 0;
+    if (rightStickY < deadzone  && rightStickY > -deadzone) rightStickY = 0;
     return [leftStickX, leftStickY, rightStickX, rightStickY];
 }
 
