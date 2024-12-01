@@ -1,5 +1,7 @@
 let leftStickInfo = document.getElementById("leftStickInfo");
 let rightStickInfo = document.getElementById("rightStickInfo");
+let headRotationInfo = document.getElementById("headRotationInfo");
+
 
 let headRotation = [0, 0];
 
@@ -39,7 +41,8 @@ function gameLoop() {
         headRotation[0] += headValues[0]
         headRotation[1] += headValues[1]
         leftStickInfo.innerText = `Left Stick: X=${stickValues[0]}, Y=${stickValues[1]}`;
-        rightStickInfo.innerText = `Head Rotation: X=${headRotation[0]}, Y=${headRotation[1]}`;
+        rightStickInfo.innerText = `Right Stick: X=${stickValues[2]}, Y=${stickValues[3]}`;
+        headRotationInfo.innerText = `Head Rotation: X=${headRotation[0]}, Y=${headRotation[1]}`;
     } catch (error) {
         console.error(error);
     }
