@@ -15,11 +15,15 @@ function getGamepad() {
     throw Error("Gamepad not found.");
 }
 
-function readAnalogSticks(gamepad) {
-    const leftStickX = gamepad.axes[0];
-    const leftStickY = gamepad.axes[1];
-    const rightStickX = gamepad.axes[2];
-    const rightStickY = gamepad.axes[3];
+function readAnalogSticks(gamepad, deadzone) {
+    let leftStickX = gamepad.axes[0];
+    if (leftStickX < deadzone && leftStickX > 0) leftStickX = 0;
+    let leftStickY = gamepad.axes[1];
+    if (leftStickY < deadzone  && leftStickY > 0) leftStickY = 0;
+    let rightStickX = gamepad.axes[2];
+    if (rightStickX < deadzone  && rightStickX > 0) rightStickX = 0;
+    let rightStickY = gamepad.axes[3];
+    if (rightStickY < deadzone  && rightStickY > 0) rightStickY = 0;
     return [leftStickX, leftStickY, rightStickX, rightStickY];
 }
 
@@ -36,7 +40,7 @@ function mapAnalogValues(x, y) {
 function gameLoop() {
     try {
         const gamepad = getGamepad();
-        const stickValues = readAnalogSticks(gamepad);
+        const stickValues = readAnalogSticks(gamepad, 0.05);
         const headValues = mapAnalogValues(stickValues[2], stickValues[3]);
         headRotation[0] += headValues[0]
         headRotation[1] += headValues[1]
