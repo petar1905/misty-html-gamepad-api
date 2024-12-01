@@ -40,7 +40,7 @@ function mapAnalogValues(x, y) {
 function gameLoop() {
     try {
         const gamepad = getGamepad();
-        const stickValues = readAnalogSticks(gamepad, 0.05);
+        const stickValues = readAnalogSticks(gamepad, 0.1);
         const headValues = mapAnalogValues(stickValues[2], stickValues[3]);
         headRotation[0] += headValues[0]
         headRotation[1] += headValues[1]
