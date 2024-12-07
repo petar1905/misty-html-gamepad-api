@@ -46,7 +46,7 @@ function gameLoop() {
         headRotation[1] += headValues[1]*sensitivity;
         leftStickInfo.innerText = `Left Stick: X=${stickValues[0]}, Y=${stickValues[1]}`;
         rightStickInfo.innerText = `Right Stick: X=${stickValues[2]}, Y=${stickValues[3]}`;
-        headRotationInfo.innerText = `Head Rotation: X=${headRotation[0]}, Y=${headRotation[1]}`;
+        headRotationInfo.innerText = `Head Rotation: X=${Math.trunc(headRotation[0])}, Y=${Math.trunc(headRotation[1])}`;
     } catch (error) {
         console.error(error);
     }
