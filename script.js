@@ -1,7 +1,7 @@
 const leftStickInfo = document.getElementById("leftStickInfo");
 const rightStickInfo = document.getElementById("rightStickInfo");
 const headRotationInfo = document.getElementById("headRotationInfo");
-const sensitivity = 0.2;
+const sensitivity = 0.02;
 
 let headRotation = [0, 0];
 
