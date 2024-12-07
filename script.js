@@ -85,10 +85,10 @@ function gameLoop() {
         const driveValues = mapAnalogValues(stickValues[0], stickValues[1]);
         leftStickInfo.innerText = `Left Stick: X=${stickValues[0]}, Y=${stickValues[1]}`;
         rightStickInfo.innerText = `Right Stick: X=${stickValues[2]}, Y=${stickValues[3]}`;
-        driveInfo.innerText = `Drive: LinearVelocity=${driveValues[1]}, AngularVelocity=${driveValues[0]}`
+        driveInfo.innerText = `Drive: LinearVelocity=${-driveValues[1]}, AngularVelocity=${driveValues[0]}`
         headRotationInfo.innerText = `Head Rotation: Yaw=${-Math.trunc(headRotation[0])}, Pitch=${Math.trunc(headRotation[1])}`;
         moveMistysHead(ip, Math.trunc(headRotation[1]), -Math.trunc(headRotation[0]));
-        moveMisty(ip, driveValues[1], driveValues[0]);
+        moveMisty(ip, -driveValues[1], driveValues[0]);
     } catch (error) {
         console.error(error);
     }
