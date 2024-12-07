@@ -1,6 +1,7 @@
 const leftStickInfo = document.getElementById("leftStickInfo");
 const rightStickInfo = document.getElementById("rightStickInfo");
 const headRotationInfo = document.getElementById("headRotationInfo");
+const sensitivity = 0.2;
 
 let headRotation = [0, 0];
 
@@ -41,8 +42,8 @@ function gameLoop() {
         const gamepad = getGamepad();
         const stickValues = readAnalogSticks(gamepad, 0.1);
         const headValues = mapAnalogValues(stickValues[2], stickValues[3]);
-        headRotation[0] += headValues[0]
-        headRotation[1] += headValues[1]
+        headRotation[0] += headValues[0]*sensitivity;
+        headRotation[1] += headValues[1]*sensitivity;
         leftStickInfo.innerText = `Left Stick: X=${stickValues[0]}, Y=${stickValues[1]}`;
         rightStickInfo.innerText = `Right Stick: X=${stickValues[2]}, Y=${stickValues[3]}`;
         headRotationInfo.innerText = `Head Rotation: X=${headRotation[0]}, Y=${headRotation[1]}`;
