@@ -4,6 +4,7 @@ const headRotationInfo = document.getElementById("headRotationInfo");
 const driveInfo = document.getElementById("driveInfo");
 const sensitivity = 0.02;
 const deadzone = 0.1;
+let ip = prompt("What is Misty's IP address?");
 let headRotation = [0, 0];
 
 function getGamepad() {
@@ -55,7 +56,7 @@ function gameLoop() {
         leftStickInfo.innerText = `Left Stick: X=${stickValues[0]}, Y=${stickValues[1]}`;
         rightStickInfo.innerText = `Right Stick: X=${stickValues[2]}, Y=${stickValues[3]}`;
         driveInfo.innerText = `Drive: LinearVelocity=${driveValues[1]}, AngularVelocity=${driveValues[0]}`
-        headRotationInfo.innerText = `Head Rotation: X=${Math.trunc(headRotation[0])}, Y=${Math.trunc(headRotation[1])}`;
+        headRotationInfo.innerText = `Head Rotation: Yaw=${-Math.trunc(headRotation[0])}, Pitch=${Math.trunc(headRotation[1])}`;
     } catch (error) {
         console.error(error);
     }
