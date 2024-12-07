@@ -42,7 +42,15 @@ function gameLoop() {
         const gamepad = getGamepad();
         const stickValues = readAnalogSticks(gamepad, deadzone);
         const headValues = mapAnalogValues(stickValues[2], stickValues[3]);
-        headRotation[0] += headValues[0]*sensitivity;
+
+        for (let i = 0; i < 1; ++i) {
+            if (headValues[i] < 0 && headRotation[i] > -100) {
+                headRotation[i] += headValues[i]*sensitivity;
+            } else if (headValues[i] > 0 && headRotation[i] < 100) {
+                headRotation[i] += headValues[i]*sensitivity;
+            }
+        }
+        if (headValues[1] < 0 && headRotation[1])
         headRotation[1] += headValues[1]*sensitivity;
         leftStickInfo.innerText = `Left Stick: X=${stickValues[0]}, Y=${stickValues[1]}`;
         rightStickInfo.innerText = `Right Stick: X=${stickValues[2]}, Y=${stickValues[3]}`;
