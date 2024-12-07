@@ -7,7 +7,8 @@ const deadzone = 0.1;
 let ip = prompt("What is Misty's IP address?");
 let headRotation = [0, 0];
 
-let framesToMove = 0;
+let framesToMoveHead = 0;
+let framesToMoveBody = 0;
 
 function getGamepad() {
     const gamepads = navigator.getGamepads();
@@ -46,7 +47,7 @@ function clamp(value, min, max) {
 }
 
 function moveMistysHead(ip, pitch, yaw) {
-    if (++framesToMove == 180) {
+    if (++framesToMoveHead == 180) {
         fetch(`http://${ip}/api/head`, {
             method: "POST",
             body: JSON.stringify({
@@ -55,7 +56,20 @@ function moveMistysHead(ip, pitch, yaw) {
                 "Velocity": 100
             })
         });
-        framesToMove = 0;
+        framesToMoveHead = 0;
+    }
+}
+
+function moveMisty(ip, linearVelocity, angularVelocity) {
+    if (++framesToMoveBody == 180) {
+        fetch(`http://${ip}/api/drive`, {
+            method: "POST",
+            body: JSON.stringify({
+                "LinearVelocity": linearVelocity,
+                "AngularVelocity": angularVelocity,
+            })
+        });
+        framesToMoveBody = 0;
     }
 }
 
@@ -74,6 +88,7 @@ function gameLoop() {
         driveInfo.innerText = `Drive: LinearVelocity=${driveValues[1]}, AngularVelocity=${driveValues[0]}`
         headRotationInfo.innerText = `Head Rotation: Yaw=${-Math.trunc(headRotation[0])}, Pitch=${Math.trunc(headRotation[1])}`;
         moveMistysHead(ip, Math.trunc(headRotation[1]), -Math.trunc(headRotation[0]));
+        moveMisty(ip, driveValues[1], driveValues[0]);
     } catch (error) {
         console.error(error);
     }
