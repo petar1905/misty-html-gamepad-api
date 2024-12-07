@@ -43,6 +43,17 @@ function clamp(value, min, max) {
     return Math.max(min, Math.min(value, max));
 }
 
+function moveMistysHead(ip, pitch, yaw) {
+    fetch(`http://${ip}/api/head`, {
+        method: "POST",
+        body: JSON.stringify({
+            "Pitch": pitch,
+            "Yaw": yaw,
+            "Velocity": 100
+        })
+    });
+}
+
 function gameLoop() {
     try {
         const gamepad = getGamepad();
@@ -57,6 +68,7 @@ function gameLoop() {
         rightStickInfo.innerText = `Right Stick: X=${stickValues[2]}, Y=${stickValues[3]}`;
         driveInfo.innerText = `Drive: LinearVelocity=${driveValues[1]}, AngularVelocity=${driveValues[0]}`
         headRotationInfo.innerText = `Head Rotation: Yaw=${-Math.trunc(headRotation[0])}, Pitch=${Math.trunc(headRotation[1])}`;
+        moveMistysHead(ip, Math.trunc(headRotation[1]), -Math.trunc(headRotation[0]));
     } catch (error) {
         console.error(error);
     }
