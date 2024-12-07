@@ -55,6 +55,7 @@ function moveMistysHead(ip, pitch, yaw) {
                 "Velocity": 100
             })
         });
+        framesToMove = 0;
     }
 }
 
