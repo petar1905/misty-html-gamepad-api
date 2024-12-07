@@ -35,7 +35,11 @@ function mapAnalogValues(x, y) {
     const scaledX = Math.floor((x - minX) / (maxX - minX) * (maxY - minY) + minY);
     const scaledY = Math.floor((y - minX) / (maxX - minX) * (maxY - minY) + minY);
     return [scaledX, scaledY];
-  }
+}
+
+function clamp(value, min, max) {
+    return Math.max(min, Math.min(value, max));
+}
 
 function gameLoop() {
     try {
@@ -43,7 +47,9 @@ function gameLoop() {
         const stickValues = readAnalogSticks(gamepad, deadzone);
         const headValues = mapAnalogValues(stickValues[2], stickValues[3]);
         headRotation[0] += headValues[0]*sensitivity;
+        headRotation[0] = clamp(headRotation[0], -100, 100);
         headRotation[1] += headValues[1]*sensitivity;
+        headRotation[1] = clamp(headRotation[1], -100, 100);
         leftStickInfo.innerText = `Left Stick: X=${stickValues[0]}, Y=${stickValues[1]}`;
         rightStickInfo.innerText = `Right Stick: X=${stickValues[2]}, Y=${stickValues[3]}`;
         headRotationInfo.innerText = `Head Rotation: X=${Math.trunc(headRotation[0])}, Y=${Math.trunc(headRotation[1])}`;
