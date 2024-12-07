@@ -1,7 +1,6 @@
-let leftStickInfo = document.getElementById("leftStickInfo");
-let rightStickInfo = document.getElementById("rightStickInfo");
-let headRotationInfo = document.getElementById("headRotationInfo");
-
+const leftStickInfo = document.getElementById("leftStickInfo");
+const rightStickInfo = document.getElementById("rightStickInfo");
+const headRotationInfo = document.getElementById("headRotationInfo");
 
 let headRotation = [0, 0];
 
