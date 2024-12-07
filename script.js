@@ -7,6 +7,8 @@ const deadzone = 0.1;
 let ip = prompt("What is Misty's IP address?");
 let headRotation = [0, 0];
 
+let framesToMove = 0;
+
 function getGamepad() {
     const gamepads = navigator.getGamepads();
     for (let i = 0; i < gamepads.length; i++) {
@@ -44,14 +46,16 @@ function clamp(value, min, max) {
 }
 
 function moveMistysHead(ip, pitch, yaw) {
-    fetch(`http://${ip}/api/head`, {
-        method: "POST",
-        body: JSON.stringify({
-            "Pitch": pitch,
-            "Yaw": yaw,
-            "Velocity": 100
-        })
-    });
+    if (++framesToMove == 180) {
+        fetch(`http://${ip}/api/head`, {
+            method: "POST",
+            body: JSON.stringify({
+                "Pitch": pitch,
+                "Yaw": yaw,
+                "Velocity": 100
+            })
+        });
+    }
 }
 
 function gameLoop() {
