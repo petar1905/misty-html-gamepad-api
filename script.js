@@ -1,6 +1,7 @@
 const leftStickInfo = document.getElementById("leftStickInfo");
 const rightStickInfo = document.getElementById("rightStickInfo");
 const headRotationInfo = document.getElementById("headRotationInfo");
+const driveInfo = document.getElementById("driveInfo");
 const sensitivity = 0.02;
 const deadzone = 0.1;
 let headRotation = [0, 0];
@@ -50,8 +51,13 @@ function gameLoop() {
         headRotation[0] = clamp(headRotation[0], -100, 100);
         headRotation[1] += headValues[1]*sensitivity;
         headRotation[1] = clamp(headRotation[1], -100, 100);
+
+        const driveValues = mapAnalogValues(stickValues[0], stickValues[1]);
+
+
         leftStickInfo.innerText = `Left Stick: X=${stickValues[0]}, Y=${stickValues[1]}`;
         rightStickInfo.innerText = `Right Stick: X=${stickValues[2]}, Y=${stickValues[3]}`;
+        driveInfo.innerText = `Drive: LinearVelocity=${driveValues[1]}, AngularVelocity=${driveValues[0]}`
         headRotationInfo.innerText = `Head Rotation: X=${Math.trunc(headRotation[0])}, Y=${Math.trunc(headRotation[1])}`;
     } catch (error) {
         console.error(error);
