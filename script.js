@@ -51,10 +51,7 @@ function gameLoop() {
         headRotation[0] = clamp(headRotation[0], -100, 100);
         headRotation[1] += headValues[1]*sensitivity;
         headRotation[1] = clamp(headRotation[1], -100, 100);
-
         const driveValues = mapAnalogValues(stickValues[0], stickValues[1]);
-
-
         leftStickInfo.innerText = `Left Stick: X=${stickValues[0]}, Y=${stickValues[1]}`;
         rightStickInfo.innerText = `Right Stick: X=${stickValues[2]}, Y=${stickValues[3]}`;
         driveInfo.innerText = `Drive: LinearVelocity=${driveValues[1]}, AngularVelocity=${driveValues[0]}`
