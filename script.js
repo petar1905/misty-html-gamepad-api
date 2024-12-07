@@ -42,10 +42,11 @@ function gameLoop() {
         const gamepad = getGamepad();
         const stickValues = readAnalogSticks(gamepad, deadzone);
         const headValues = mapAnalogValues(stickValues[2], stickValues[3]);
-        let isWithinBounds;
+
         for (let i = 0; i <= 1; ++i) {
-            isWithinBounds = headRotation[i] > -100 && headRotation[i] < 100;
-            if (isWithinBounds) {
+            if (headValues[i] < 0 && headRotation[i] > -100) {
+                headRotation[i] += headValues[i]*sensitivity;
+            } else if (headValues[i] > 0 && headRotation[i] < 100) {
                 headRotation[i] += headValues[i]*sensitivity;
             }
         }
