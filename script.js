@@ -2,7 +2,7 @@ const leftStickInfo = document.getElementById("leftStickInfo");
 const rightStickInfo = document.getElementById("rightStickInfo");
 const headRotationInfo = document.getElementById("headRotationInfo");
 const sensitivity = 0.02;
-
+const deadzone = 0.1;
 let headRotation = [0, 0];
 
 function getGamepad() {
@@ -40,7 +40,7 @@ function mapAnalogValues(x, y) {
 function gameLoop() {
     try {
         const gamepad = getGamepad();
-        const stickValues = readAnalogSticks(gamepad, 0.1);
+        const stickValues = readAnalogSticks(gamepad, deadzone);
         const headValues = mapAnalogValues(stickValues[2], stickValues[3]);
         headRotation[0] += headValues[0]*sensitivity;
         headRotation[1] += headValues[1]*sensitivity;
